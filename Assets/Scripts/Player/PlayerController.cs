@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         Debug.Log("Move: " + value.Get<Vector2>());
-        var dir = value.Get<Vector2>().normalized;
+        var dir = value.Get<Vector2>();
         direction.x = dir.x;
         direction.z = dir.y;
     }
