@@ -25,15 +25,17 @@ public class SplitKeyboardPlayerInputManager : MonoBehaviour
         if (!existingPlayerInputs.ContainsKey(playerIndex))
         {
             var playerInput = PlayerInput.Instantiate(prefab, controlScheme: controlScheme, playerIndex: playerIndex, pairWithDevice: Keyboard.current);
+            playerInput.neverAutoSwitchControlSchemes = true;
             playerInput.SwitchCurrentControlScheme(controlScheme);
             existingPlayerInputs.Add(playerIndex, playerInput);
             SendMessage("OnPlayerJoined", playerInput);
         }
     }
 
-    //TODO remove player from game and free up playerIndex in existingPlayerInputs
+    //TODO remove player from game and free up playerIndex in existingPlayerInputs **DONE**
     public void LeavePlayer(int playerIndex)
     {
         var playerInput = existingPlayerInputs[playerIndex];
+        Destroy(playerInput.gameObject);
     }
 }
